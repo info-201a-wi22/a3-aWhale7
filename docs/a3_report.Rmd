@@ -1,0 +1,49 @@
+---
+title: "A3 Report"
+author: "Paul Kim"
+date: "2/16/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Load the needed packages
+library("ggplot2")
+library("dplyr")
+library("maps")
+source("../source/analysis.R")
+```
+
+## **Introduction**
+
+This report aims to explore trends regarding the population counts of specific races within the United States jail system. This report focuses primarily on the counts of Asian American & Pacific Islander (AA/PI) inmates within specific areas and times. The decision to focus on AA/PI trends is due to the author's own race being AA/PI. The author is also simply curious on how the AA/PI race fares in this part of American society. This report additionally provides some comparisons between AA/PI counts and the Black and White races. Trends are explored through both individual calculated values and various visualizations.
+
+### **Summary Information**
+
+Given the very large nature of the dataset, I decided to take a more in-depth, focused look on the AA/PI values. I first sought to find the count of the highest amount of AA/PI inmates within a specific county jail, which turned out to be **`r count_highest_aapi_jail_pop`**. I also decided to find the county which housed these `r count_highest_aapi_jail_pop` inmates in order to better understand the geographical area in which they reside. The county with the highest count of AA/PI inmates within the year ranges of the data is **`r county_highest_aapi_jail_pop`**. I wanted to find the average amount of AA/PI inmates the `r county_highest_aapi_jail_pop` jail held across time to understand whether the count of `r count_highest_aapi_jail_pop` I found earlier was just an unusually high number or a normal AA/PI count for the `r county_highest_aapi_jail_pop` jail. This average turned out to be **`r avg_aapi_count_highcounty`**, which is significantly lower than `r count_highest_aapi_jail_pop`. This may indicate that the year in which the highest count for AA/PI inmates was recorded may have certain significance in `r county_highest_aapi_jail_pop`, such as the 1992 LA riots. After understanding these preliminary pieces of data for the AA/PI population, I wanted to see how it compared to the Black population. I first found that **`r county_highest_black_jail_pop`** is also the county which housed the largest amount of Black inmates within the year ranges the data provides. I also then wanted to see the average amount of Black inmates in the `r county_highest_black_jail_pop` jail across time in order to compare the average to the AA/PI average. This average turned out to be **`r avg_black_count_highcounty`**. An initial observation is that though both AA/PI and Black inmates share the same county where their jail count is the highest, the Black inmate average is much higher.
+
+### **Visualizations of Data**
+
+#### _What is the trend for the population of AA/PI, White, and Black jail inmates in Los Angeles County over the last 10 years?_
+
+```{r linechart, echo = FALSE}
+  plot(linechart)
+```
+
+Our summary values showed that the `r county_highest_aapi_jail_pop` jail housed both the highest amount of AA/PI and Black inmates. I decided I wanted to view how the inmate count for these races changed over the last few years to gain a better understanding on if these highest counts are recent or not. I also wanted to see how White inmate counts changed over the last few years. Surprisingly, the recent counts of AA/PI inmates in LA County are nowhere near their highest recorded value of 893 seen in the summary; most of the values are in the one hundreds. The recent counts of Black inmates in LA County however are close to their average recorded value of 6645.95 seen in the summary; many of the values are seen in the 5000-6000 range. This goes to show that the Black jail population continues to be near their highest recorded value while the AA/PI jail population has declined significantly. This may point towards the over-incarceration of the Black population.
+
+#### _Within the most recent year in California, what is the relationship between total population counts of AA/PI citizens per county and jail population counts of AA/PI inmates per county?_
+
+```{r scatterplot, echo = FALSE}
+  plot(scatterplot)
+```
+
+Given that LA County is located in the State of California, I was curious to explore values of interest in other California counties. More specifically, I was interested in the relationship between the total population count of AA/PI citizens per county and jail population count of AA/PI inmates per county within the most recent year the dataset provides (2018). The scatterplot above showcases some notable results. While many counties see a low count of both AA/PI citizens and AA/PI inmates, some counties stand out from this trend and are therefore labeled. In 2018, San Bernardino County had the highest amount of AA/PI inmates while having the lowest count of AA/PI citizens. On the other hand, LA County has the highest amount of AA/PI citizens but has a reletively modest count of AA/PI inmates. This can showcase that just because a large amount of AA/PI citizens live in a particular county does not mean they'll have the highest count of AA/PI inmates. 
+
+#### _In the year in which the AA/PI jail population was at it highest, what is the trend of AA/PI jail counts across the United States by state?_
+
+```{r map, echo = FALSE}
+  plot(mapchart)
+```
+
+Much of the analysis has been centered on the State of California. This map chart aims to take a look at the trends of AA/PI inmates across the entire nation in the year where the AA/PI inmate count was at it's highest. This map chart clearly showcases California as the state with the highest total AA/PI inmate count, but some other notable information appears as well. States such as Washington, Texas, Nevada, and Georgia seem to have sizable counts of AA/PI inmates, while states like Idaho, Montana, and Oregon seem to have a smaller AA/PI inmate count comparatively. The map additionally shows that the count of AA/PI inmates is concentrated primarily within California, with the rest of the United States owning a relatively smaller amount of AA/PI inmates. This may showcase the potential over-policing of citizens in the State of California. 
